@@ -1,0 +1,162 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!--Always load p5.js first, all other libraries (dom, sound, etc) depend on it-->
+
+<title>Pseudoshop</title>
+
+
+
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+  <script language="javascript" src="libraries/p5.dom.js"></script>
+  <script language="javascript" type="text/javascript" src="definitions.js"></script>
+  <script language="javascript" type="text/javascript" src="sketch.js"></script>
+<!--link rel="stylesheet" href="libraries/bootstrap.min.css"-->
+  <link rel="stylesheet" type="text/css" href="pseudo.css">
+
+
+
+  <style>
+  .dropdown {
+      /*position: relative;
+      display: inline-block;*/
+  }
+
+  .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: rgba(0,0,0,0);
+      min-width: 70px;
+      /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+      padding: 170px 0px;
+  }
+
+  .dropdown:hover .dropdown-content {
+      display: block;
+  }
+  .ddropdown {
+      /*position: relative;
+      display: inline-block;*/
+  }
+
+  .ddropdown-content {
+      display: none;
+      position: absolute;
+      background-color: rgba(0,0,0,0);
+      min-width: 170px;
+      /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+        padding: 170px 0px;
+  }
+
+  .ddropdown:hover .ddropdown-content {
+      display: block;
+  }
+  </style>
+
+
+
+</head>
+
+<!--Turn off default right-click behaviour-->
+<body oncontextmenu="return false;">
+  <!--<h1>Pseudoshop</h1>-->
+  <!--Create a textbox called textname-->
+  <!--<input id ="textName"></input>-->
+  <!--img src="data/firefox.png" class="noselect"alt="Ellipse" style="width:120px;height:120px;position: absolute; left: 1352px; top: 485px; "-->
+
+  <center><button class="noselect btn btn-danger" type="button" id="brush1_button" style="position: absolute; left: 22px; top: 464px; " ><img src="data/block.svg" alt="Ellipse" style="width:85px;height:85px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="brush2_button" style="position: absolute; left: 112px; top: 464px; "><img src="data/etch.svg" alt="Ellipse" style="width:85px;height:85px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="brush3_button" style="position: absolute; left: 22px; top: 552px; "><img src="data/fount.svg" alt="Ellipse" style="width:50px;height60px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="brush4_button" style="position: absolute; left: 112px; top: 552px; "><img src="data/Blot.svg" alt="Ellipse" style="width:85px;height:85px;"></button></center>
+
+  <!--img src="data/brush.svg" class="noselect"alt="Eraser" style="width:85px;height:85px; position: absolute; left: 1170px; top: 245px; "-->
+
+  <button class="noselect btn btn-danger" type="button" id="triangle_button"  style="position: absolute; left: 22px; top: 376px; " ><img src="data/triangle.svg" alt="Ellipse" style="width:85px;height:85px;"></button>
+  <button class="noselect btn btn-danger" type="button" id="bezier_button"  style="position: absolute; left: 112px; top: 376px; " ><img src="data/bezier.svg" alt="Ellipse" style="width:85px;height:85px;"></button>
+
+  <button class="noselect thinbutton" type="button" id="copy_button"  style="position: absolute; left: 1127px; top: 198px; " >Copy</button>
+  <button class="noselect thinbutton" type="button" id="paste_button"  style="position: absolute; left: 1162px; top: 198px; " >Paste</button>
+
+  <button class="noselect btn btn-danger" type="button" id="text_button"  style="position: absolute; left: 1217px; top: 287px; " >Text</button>
+  <button class="noselect btn btn-danger" type="button" id="crop_button"  style="position: absolute; left: 1127px; top: 109px; "><img src="data/crop.svg" alt="Ellipse" style="width:85px;height:85px;"></button>
+
+  <button class="noselect btn btn-danger" type="button" id="pencil_button"  style="position: absolute; left: 22px; top: 20px; " ><img src="data/pencil.svg" alt="Pencil" style="width:85px;height:85px;"></button>
+  <!--<button class="noselect" type="button" id="brush_button"  style="position: absolute; left: 22px; top: 109px; " ><img src="data/brush.svg" alt="Eraser" style="width:85px;height:85px;"></button>-->
+  <button class="noselect" type="button" id="select_button"  style="position: absolute; left: 22px; top: 109px; " ><img src="data/select.svg" alt="Eraser" style="width:85px;height:85px;"></button>
+  <center><button class="noselect btn btn-danger" type="button" id="eraser_button" style="position: absolute; left: 22px; top: 198px; "><img src="data/eraser.svg" alt="Brush" style="width:85px;height:85px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="spray_button" style="position: absolute; left: 22px; top: 287px; "><img src="data/spray.svg" alt="Spray" style="width:85px;height:85px;"></button></center>
+
+
+<!--center><button class="noselect btn btn-danger" type="button" id="stamp1_button" style="position: absolute; left: 1307px; top: 20px; "><img src="emoji/1.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="stamp2_button" style="position: absolute; left: 1307px; top: 109px; "><img src="emoji/2.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="stamp3_button" style="position: absolute; left: 1307px; top: 198px; "><img src="emoji/3.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="stamp4_button" style="position: absolute; left: 1307px; top: 287px; "><img src="emoji/4.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="stamp5_button" style="position: absolute; left: 1397px; top: 20px; "><img src="emoji/5.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="stamp6_button" style="position: absolute; left: 1397px; top: 109px; "><img src="emoji/6.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="stamp7_button" style="position: absolute; left: 1397px; top: 198px; "><img src="emoji/7.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="stamp8_button" style="position: absolute; left: 1397px; top: 287px; "><img src="emoji/8.png" alt="Spray" style="width:56px;height:56px;"></button></center-->
+  <center><button class="noselect friend-button" type="button" id="instruct_button"  style="position: absolute; left: 1080px; top: 623px; " ><img src="data/quest.png" alt="Line" style="width:15px;height:15px;"></button></center>
+  <p>
+
+  </p>
+
+  <button class="noselect btn btn-danger" type="button" id="clear_button"  style="position: absolute; left: 1127px; top: 287px; " >Clear</button>
+
+  <!--input type="range"class="noselect" min="1" max="30" style="position: absolute; left: 15px; top: 635px;" id="myThickness" value="15">
+  <input type="range" class="noselect"min="0" max="255" style="position: absolute; left: 1115px; top: 590px;" id="mySaturation" value="255"-->
+
+  <button class="noselect btn btn-danger" type="button" id="grid_button"  style="position: absolute; left: 112px; top: 20px; " ><img src="data/grid.svg" alt="Grid" style="width:85px;height:85px;"></button>
+  <button class="noselect btn btn-danger" type="button" id="line_button"  style="position: absolute; left: 112px; top: 109px; " ><img src="data/line.svg" alt="Line" style="width:85px;height:85px;"></button>
+  <center><button class="noselect btn btn-danger" type="button" id="rect_button" style="position: absolute; left: 112px; top: 287px; "><img src="data/rectangle.svg" alt="Rectangle" style="width:85px;height:85px;"></button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="ellipse_button" style="position: absolute; left: 112px; top: 198px; "><img src="data/ellipse.svg" alt="Ellipse" style="width:85px;height:85px;"></button></center>
+  <center><button class="noselect thinbutton" type="button" id="savep_button" style="position: absolute; left: 1217px; top: 198px; ">Save PNG</button></center>
+  <center><button class="noselect thinbutton" type="button" id="savej_button" style="position: absolute; left: 1252px; top: 198px; ">Save JPG</button></center>
+  <center><button class="noselect btn btn-danger" type="button" id="drop_button" style="position: absolute; left: 1217px; top: 109px; "><img src="data/drop.svg" alt="Ellipse" style="width:85px;height:85px;"></button></center>
+
+
+  <div class="ddropdown">
+    <button class="noselect btn btn-danger" type="button"style="position: absolute; left: 1127px; top: 20px; " ><img src="data/filt.png" alt="Ellipse" style="position: absolute; left: 15px; top: 16px; width:40px;height:40px;"></button>
+    <div class="ddropdown-content"style="position: absolute; left: 1127px; top: 20px; ">
+      <center><button class="noselect btn btn-danger" type="button" id="filter1_button"style="position: absolute; left: 0px; top: 0px; " >Vertical Flip</button></center>
+        <center><button class="noselect btn btn-danger" type="button" id="filter2_button"style="position: absolute; left: 0px; top: 89px; " >Poster</button></center>
+        <center><button class="noselect btn btn-danger" type="button" id="filter3_button"style="position: absolute; left: 0px; top: 178px; " >Vintage</button></center>
+        <center><button class="noselect btn btn-danger" type="button" id="filter4_button" style="position: absolute; left: 0px; top: 267px; ">B&W</button></center>
+        <center><button class="noselect btn btn-danger" type="button" id="filter5_button"style="position: absolute; left: 90px; top: 89px; ">Straight Blur</button></center>
+        <center><button class="noselect btn btn-danger" type="button" id="filter6_button" style="position: absolute; left: 90px; top: 178px; ">Pixelate</button></center>
+        <center><button class="noselect btn btn-danger" type="button" id="filter7_button" style="position: absolute; left: 90px; top: 267px; ">Dynamic Pixelate</button></center>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="noselect btn btn-danger" type="button" style="position: absolute; left: 1217px; top: 20px; " ><img src="data/stamp.png" alt="Ellipse" style="position: absolute; left: 12px; top: 12px; width:45px;height:45px;"></button>
+    <div class="dropdown-content"style="position: absolute; left: 1217px; top: 20px; ">
+      <center><button class="noselect btn btn-danger" type="button" id="stamp1_button"style="position: absolute; left: 0px; top: 0px; " ><img src="emoji/1.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+        <center><button class="noselect btn btn-danger" type="button" id="stamp2_button"style="position: absolute; left: 0px; top: 89px; " ><img src="emoji/2.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+        <center><button class="noselect btn btn-danger" type="button" id="stamp3_button"style="position: absolute; left: 0px; top: 178px; " ><img src="emoji/3.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+        <center><button class="noselect btn btn-danger" type="button" id="stamp4_button" style="position: absolute; left: 0px; top: 267px; "><img src="emoji/4.png" alt="Spray" style="width:56px;height:56px;"></button></center>
+          </div>
+  </div>
+
+
+
+
+
+  <!--  <img class="noselect" src="color-picker.png" alt="Brush" style="position: absolute; left: 25px; top: 458px;width:150px;height:150px;">
+
+
+
+
+
+
+
+  The <div> tag defines a division or a section in an HTML document.
+  It is used to group block-elements to format them with CSS.
+  The canvasContainer div will hold the canvas-->
+  <div id="canvasContainer"style="position: absolute; left: 90px; top: 270px; ">
+  </div>
+  <!--The infoContainter div will hold the mouseX,mouseY position-->
+  <div id="infoContainer">
+  </div>
+  <!--<div class="round-button"><div class="round-button-circle"><a href="http://example.com" class="round-button">Button</a></div></div>-->
+</body>
+
+</html>
